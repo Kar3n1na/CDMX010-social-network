@@ -1,0 +1,92 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: 'Nunito', sans-serif;
+  }
+  
+  *{
+    box-sizing: border-box;
+  }
+
+body {
+  background-position: center center;
+  background-size: cover;  
+  background-color:rgb(112, 206, 112);
+  color: white;
+}  
+
+.logInForm{
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  min-height: 100vh;
+  background-color:rgb(102, 185, 102);
+  font-size: large;
+}
+#sign-in-form {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 20%;
+  left: 10%;
+  right: 10%;
+  display:flex
+  
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction:column;
+  padding: 0px;
+
+}
+input{
+  height: 50px;
+  width: 200px;
+  border-radius: 20px;  
+  font-family: 'Nunito', sans-serif;
+  font-size: medium;
+  text-align: center;
+  background: rgb(241, 236, 236);
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 100;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+#submitBtn {
+  width: 200px;
+  background-color: #e7c141;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#submitBtn:hover {
+  background-color: #4d84e2;
+}
+img{
+  padding: 100px;
+  width: 400px;
+  height: auto;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  position:absolute;
+  top:0%;
+}
