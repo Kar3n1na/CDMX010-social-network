@@ -1,8 +1,8 @@
 //Vista del LogIn
 import { onNavigate } from '../main.js';
 
- export const logIn = () => {
-   return `<div class="logInForm">
+ export const logIn = (container) => {
+   const html=`<div class="logInForm">
        <img src="ecoFreaksLogo.png">
       <form action="/" id="sign-in-form">
       <label for="userName">Usuario</label>
@@ -15,41 +15,41 @@ import { onNavigate } from '../main.js';
     </form>
     </div>
     `
+    container.innerHTML = html
+    const sendButton = document.getElementById('submitBtn');
+    sendButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const username= document.getElementById('userName');
+        const usermail= document.getElementById('userMail');
+        let usuarios = [
+            {
+              usuario: username.value,
+              email: usermail.value,
+            }]; 
+        localStorage.setItem('user', JSON.stringify(usuarios));
+        onNavigate('/home');
+    })
   };
 
-/* //validación de email
-  const email = document.getElementById("userMail");
+//validación de email
+/* const email = document.getElementById("userMail");
   email.addEventListener("input", function (event) {
     if (email.validity.typeMismatch) {
       email.setCustomValidity("¡Se esperaba una dirección de correo electrónico!");
     } else {
       email.setCustomValidity("");
     }
-  });
-
-  const validityemail = ()=>{
+  }); 
+ */
+/*   const validityemail = ()=>{
    if (email.validity.typeMismatch) {
       email.setCustomValidity("¡Se esperaba una dirección de correo electrónico!");
     } else {
       email.setCustomValidity("");
     }
     return true
-  } */
-
+  }  */
+//function addEvents(){}
   // Aqui el Router
-window.addEventListener('DOMContentLoaded', () => {
-     const sendButton = document.getElementById('submitBtn');
-     sendButton.addEventListener('click', (e) => {
-         e.preventDefault();
-         const username= document.getElementById('userName');
-         const usermail= document.getElementById('userMail');
-         let usuarios = [
-            {
-               usuario: username.value,
-               email: usermail.value,
-            }]; 
-         localStorage.setItem('user', JSON.stringify(usuarios));
-         onNavigate('/home');
-     })
-  }); 
+
 

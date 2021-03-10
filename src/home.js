@@ -1,10 +1,17 @@
 import { onNavigate } from '../main.js';
 
- export const homePage = () => {
-    return ` <h1>Si funciono!!</>
+ export const homePage = (container) => {
+    const html = ` <h1>Si funciono!!</>
     <button id="newPost"> Crea una publicación </button>
     `
-  };
 
-  //const rootDiv = document.getElementById('root');
-  //rootDiv.innerHTML = homePage();
+    // renders template/component/view
+    container.innerHTML = html
+
+    // registers events
+    const newPostbtn = document.getElementById('newPost');
+    newPostbtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      onNavigate('/post');
+    })
+};
