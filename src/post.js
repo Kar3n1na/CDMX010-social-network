@@ -7,39 +7,46 @@ export const postPage = (container) => {
     <br>
      <input type="text" id="post-area">
      <br>
-      <button type="submit" id="post-btn">Publicar</button>
+      <button id="post-btn">Publicar</button>
     </form>
-    <div id="muestra-actividades"><b></b>
-    </div>
     </div>
     `
   container.innerHTML = html
-
+ //Array donde se van a guardar los nuevos elementos "post"
   let postList = JSON.parse(localStorage.getItem("posting"));
   if(postList==null){
     postList=[]
-  } 
+  } /* else {
+    
+  } */
+  const imprime = () => {
+  postList.forEach(element => {
+    container.innerHTML += setHtml(element)
+  });
+ }
+
+  //Aca guarda los manda al array
   const createPost = (post) => {
     let item = {
-      post: post,
+      post:post,
     }
     postList.push(item);
     return item;
   }
+  //Esta funcion guarda los post en el local
  const createdPost = () => {
     localStorage.setItem('posting', JSON.stringify(postList));
+    //console.log(postList);
+    imprime();
   
   } 
 
-
-  postList.forEach(element => {
-    container.innerHTML += setHtml(element)
-  });
-
-
+ //Funcion del boton
   const postBtn = document.getElementById('post-btn');
   postBtn.addEventListener('click', (event) => {
     event.preventDefault();
+    //stopPo
+  //Aca trae el texto del input
     let newText = document.getElementById('post-area').value;
     createPost(newText);
     createdPost();
