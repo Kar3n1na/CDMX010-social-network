@@ -7,64 +7,60 @@ export const postPage = (container) => {
     <br>
      <input type="text" id="post-area">
      <br>
-      <button id="post-btn">Publicar</button>
+      <a id="post-btn">Publicar</a>
     </form>
     </div>
     `
   container.innerHTML = html
- //Array donde se van a guardar los nuevos elementos "post"
+  //Array donde se van a guardar los nuevos elementos "post"
   let postList = JSON.parse(localStorage.getItem("posting"));
-  if(postList==null){
-    postList=[]
+  if (postList == null) {
+    postList = []
   } /* else {
     
   } */
   const imprime = () => {
-  postList.forEach(element => {
-    container.innerHTML += setHtml(element)
-  });
- }
+    const container2 = document.getElementById(container.id);
+    postList.forEach(posteo => {
+      container2.innerHTML += `<h1>${posteo.post}</h1>`
+
+    });
+    /*   const arrayElementos= postList.map (function (unPost) {
+        return `<h1>${elements.post}</h1>`
+      }); */
+
+    /*     postList.forEach(element => {
+        container2.innerHTML += setHtml(element)
+      }); */
+  }
+
 
   //Aca guarda los manda al array
   const createPost = (post) => {
     let item = {
-      post:post,
+      post: post,
     }
     postList.push(item);
     return item;
   }
   //Esta funcion guarda los post en el local
- const createdPost = () => {
+  const createdPost = () => {
     localStorage.setItem('posting', JSON.stringify(postList));
     //console.log(postList);
     imprime();
-  
-  } 
 
- //Funcion del boton
+  }
+
+  //Funcion del boton
   const postBtn = document.getElementById('post-btn');
   postBtn.addEventListener('click', (event) => {
+    console.log("El click funciona");
     event.preventDefault();
-    //stopPo
-  //Aca trae el texto del input
+    event.stopPropagation();
+    //Aca trae el texto del input
     let newText = document.getElementById('post-area').value;
     createPost(newText);
     createdPost();
   })
-  
+
 };
-
-// let fueraDeLocalStorage= localStorage.getItem("posting");
-//Array donde se alamacena lo ingresado en el text area
-/*  let postList = JSON.parse(localStorage.getItem("posting"));
-if(postList==null){
-  postList=[]
-} */
-
-/* const previousPost = () => {
-  const listaDePost = document.getElementById('muestra-actividades');
-  listaDePost.innerHTML = fueraDeLocalStorage;
-  previousPost() 
-}*/
-  //<textarea id="post-area" name="post-area" rows="4" cols="50">
-  //</textarea>  */
