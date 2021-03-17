@@ -2,15 +2,12 @@ import { setHtml } from './components/sethtmlPost.js'
 
 export const postPage = (container) => {
   const html = `<div id="post-input">
-    <form>
-     <label for="post-area">Post</label>
-    <br>
-     <input type="text" id="post-area">
-     <br>
-      <a id="post-btn">Publicar</a>
-    </form>
-    </div>
-    `
+  <label for="post-area">Post</label>
+  <input type="text" id="post-area" />
+  <button id="post-btn">Publicar</button>
+  </div>
+  <div id="posts"></div>`;
+    
   container.innerHTML = html
   //Array donde se van a guardar los nuevos elementos "post"
   let postList = JSON.parse(localStorage.getItem("posting"));
@@ -20,11 +17,10 @@ export const postPage = (container) => {
     
   } */
   const imprime = () => {
-    const container2 = document.getElementById(container.id);
+    const containersin = document.getElementById("posts");
     postList.forEach(posteo => {
-      container2.innerHTML += `<h1>${posteo.post}</h1>`
-
-    });
+      containersin.innerHTML += `<h1>${posteo.post}</h1>`
+    })
     /*   const arrayElementos= postList.map (function (unPost) {
         return `<h1>${elements.post}</h1>`
       }); */
