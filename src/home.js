@@ -1,7 +1,9 @@
 import { onNavigate } from '../main.js';
 
  export const homePage = (container) => {
-    const html = ` <h1>Si funciono!!</>
+    const html = `<nav class=navbar-logo><i id="account_circle1" class="material-icons"> account_circle</i>
+    <i id="menu-ham" class="material-icons">menu</i>
+    </nav>
     <button id="newPost"> Crea una publicación </button>
     `
 
