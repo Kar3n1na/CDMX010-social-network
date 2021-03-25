@@ -10,39 +10,34 @@ export const postPage = (container) => {
   <input type="text" id="post-text">
   <button type="submit">Publicar</button>
 </form> </div>
-<div id="listaPost"></div>`;
+<div id="listaPost"></div>`
 
-  container.innerHTML = html
+ container.innerHTML = html 
 
-  //Variables GLobales
   //Acá guarda el formulario 
   const formularioUI = document.getElementById('formulario');
+
   //Aqui guarda lo recibido en la seccion donde se imprimen las actividades
   const showPost = document.getElementById('listaPost');
   //Aqui se almacena todo lo guardado por el usuario en un "Array" no necesita llamarse "array"
   let savePost = [];
-
   //Funciones 
-  //En esta funcion "Crear Item" se van creando las cosas que entraran dentro del Array vacio, 
-  //cada que creemos una actividad necesitamos mandar un parametro, en este caso "actividad"
-  const crearItem = (post) => {
+    const crearItem = (post) => {
     const saveUser = JSON.parse(localStorage.getItem('user'));
     let item = {
       post: post,
-      user:saveUser[0].usuario
-
+      user: saveUser[0].usuario
     }
     savePost.push(item);
     return item;
   }
- 
 
   const saveDB = () => {
     //Aqui rutina es unicamente un identificador
     localStorage.setItem('recentPost', JSON.stringify(savePost))
     printDB();
   }
-
+ 
   const printDB = () => {
     showPost.innerHTML = '';
     savePost = JSON.parse(localStorage.getItem('recentPost'));
@@ -50,25 +45,35 @@ export const postPage = (container) => {
       savePost = [];
     } else {
       savePost.forEach(element => {
-        showPost.innerHTML += setHtml(element) 
+        showPost.innerHTML += setHtml(element)
       });
     }
   }
 
   const deleteDB = (post) => {
     let indexArray;
-    savePost.forEach((elemento,index) => {
+    savePost.forEach((element, index) => {
       //Aqui se puede utilizar Find Index
-      if(elemento.post === post){
-       indexArray=index;
+      if (element.post === post) {
+        indexArray = index;
       }
     }
-  );
-  savePost.splice(indexArray,1);
-  saveDB()
+    );
+    savePost.splice(indexArray, 1);
+    saveDB()
   }
 
-
+  const editDB = (post) => {
+    let indexArray = savePost.findIndex((element) => {
+      return (element.post === post);
+    })
+    const element = savePost[indexArray];
+    const midiv = document.getElementById('listaPost');
+    midiv.innerHTML = `
+     <textarea>${element.post}</textarea>
+     <i class="material-icons">save</i></
+       `
+  }
   //EventListener
 
   formularioUI.addEventListener('submit', (e) => {
@@ -82,15 +87,19 @@ export const postPage = (container) => {
 
   document.addEventListener('DOMContentLoaded', printDB);
 
-  showPost.addEventListener('click', (e) =>{
+  showPost.addEventListener('click', (e) => {
     e.preventDefault();
-     if(e.target.innerHTML === 'delete' || e.target.innerHTML === 'description'){
-      let texto=e.path[2].childNodes[2].innerHTML;
-      if(e.target.innerHTML === 'delete'){
+    if (e.target.innerHTML === 'delete' || e.target.innerHTML === 'description') {
+
+      let texto = e.path[2].childNodes[3].innerHTML;
+
+      if (e.target.innerHTML === 'delete') {
+
         deleteDB(texto);
-
       }
-    } 
-  })
-
-};
+      if (e.target.innerHTML === 'description') {
+        // Accción de editar
+        editDB(texto);
+      }
+    }});
+  };
